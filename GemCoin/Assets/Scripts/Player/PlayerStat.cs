@@ -12,7 +12,8 @@ public class PlayerStat
     // 외부에서 접근할 기본 정보들
     public PlayerCharType CharType => _baseStat.charType;
     public int MaxHp => _baseStat.maxHp;
-
+    
+    public int MaxJumpCount => _baseStat.maxJumpCount;
     public PlayerStat(PlayerStatSO so)
     {
         _baseStat = so;

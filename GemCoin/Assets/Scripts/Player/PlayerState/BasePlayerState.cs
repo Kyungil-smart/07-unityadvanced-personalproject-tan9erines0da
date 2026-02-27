@@ -13,4 +13,7 @@ public abstract class BasePlayerState
     public virtual void Update() { }
     public virtual void FixedUpdate() { }
     public virtual void Exit() { }
+    
+    public virtual void OnJump() { }
+    public virtual void OnSlide(bool isPressed) { }
 }

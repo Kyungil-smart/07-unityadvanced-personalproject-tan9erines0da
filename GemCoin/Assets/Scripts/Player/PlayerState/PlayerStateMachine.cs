@@ -10,8 +10,19 @@ public class PlayerStateMachine
 
     public void TransitionTo(BasePlayerState newState)
     {
+        if(CurrentState == newState) return;
+        
         CurrentState.Exit();
         CurrentState = newState;
         CurrentState.Enter();
+    }
+    public void Update()
+    {
+        CurrentState?.Update();
+    }
+
+    public void FixedUpdate()
+    {
+        CurrentState?.FixedUpdate();
     }
 }
