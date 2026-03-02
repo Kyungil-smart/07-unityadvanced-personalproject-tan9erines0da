@@ -33,9 +33,17 @@ public class InputReaderSO : ScriptableObject, PlayerInputActions.IHubActions, P
             _inputActions.Running.SetCallbacks(this);
             _inputActions.Hub.SetCallbacks(this);
         }
+        _inputActions.Running.Enable();
+        _inputActions.Hub.Enable();
+    }
+    private void OnDisable()
+    {
+        _inputActions.Running.Disable();
+        _inputActions.Hub.Disable();
+        
     }
 
-    // 맵 활성화 제어 (씬 컨트롤러에서 호출)
+    // 맵 활성화 제어 
     public void EnableRunningInput()
     {
         _inputActions.Hub.Disable();
