@@ -24,4 +24,9 @@ public class TransitionManager : SingletonMono<TransitionManager>
 
         _animator.SetTrigger("Out");
     }
+
+    public void PlayTransition(string inout)
+    {
+        _animator.SetTrigger(inout);
+    }
 }

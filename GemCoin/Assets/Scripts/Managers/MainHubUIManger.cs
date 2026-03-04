@@ -2,14 +2,26 @@
 using UnityEngine;
 public class MainHubUIManger : MonoBehaviour
 {
+    // [Header("Input")]
+    // [SerializeField] private InputReaderSO _inputReader;
+    
     [Header("References")]
     [SerializeField] private BehaviorGraphAgent _agent; 
     [SerializeField] private GameObject[] _layers;
 
+    void Awake()
+    {
+        // Debug.Log("MainHubUIManger : Awake");
+        // _inputReader.EnableHubInput();
+    }
+
     // 버튼에서 호출할 함수
     public void OnClickChangeState(int newStateIndex)
     {
-        _agent.SetVariableValue("TargetState", (HubUIState)newStateIndex);
+        Debug.Log("Click");
+        if(_agent == null) return;
+        _agent.SetVariableValue("TargetUI", (HubUIState)newStateIndex);
+        //BT의 TargetUI 변경
     }
 
     // BT의 Action 노드에서 호출할 실제 로직

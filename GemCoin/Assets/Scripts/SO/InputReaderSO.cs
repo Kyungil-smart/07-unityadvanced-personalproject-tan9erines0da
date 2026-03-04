@@ -20,26 +20,40 @@ public class InputReaderSO : ScriptableObject, PlayerInputActions.IHubActions, P
     public event UnityAction<bool> Skill3Event = delegate { };
 
     
-
+    [SerializeField] private InputActionAsset _inputActionAsset;
     private PlayerInputActions _inputActions;
     
     public Vector2 PointerPosition { get; private set; }
 
     private void OnEnable()
     {
-        if (_inputActions == null)
+        Debug.Log("InputReaderSO : OnEnable");
+        // if (_inputActions == null)
+        // {
+        //     _inputActions = new PlayerInputActions();
+        //     _inputActions.Running.SetCallbacks(this);
+        //     _inputActions.Hub.SetCallbacks(this);
+        // }
+        // _inputActions.Running.Enable();
+        // _inputActions.Hub.Enable();
+        var hubMap = _inputActionAsset.FindActionMap("Hub");
+        if (hubMap != null)
         {
-            _inputActions = new PlayerInputActions();
-            _inputActions.Running.SetCallbacks(this);
-            _inputActions.Hub.SetCallbacks(this);
+            hubMap.Enable();
+            // 특정 액션(예: Click)을 찾아서 직접 구독
+            var clickAction = hubMap.FindAction("Click");
+            if (clickAction != null)
+            {
+                clickAction.performed += OnClick; // 여기서 직접 OnClick 메서드 연결
+                clickAction.canceled += OnClick;
+            }
         }
-        _inputActions.Running.Enable();
-        _inputActions.Hub.Enable();
     }
     private void OnDisable()
     {
-        _inputActions.Running.Disable();
-        _inputActions.Hub.Disable();
+        Debug.Log("InputReaderSO : OnDisable 호출됨. 호출 스택: " + System.Environment.StackTrace);
+        // _inputActions.Running.Disable();
+        // _inputActions.Hub.Disable();
         
     }
 
@@ -52,12 +66,13 @@ public class InputReaderSO : ScriptableObject, PlayerInputActions.IHubActions, P
 
     public void EnableHubInput()
     {
-        _inputActions.Running.Disable();
-        _inputActions.Hub.Enable();
+        //_inputActions.Running.Disable();
+        //_inputActions.Hub.Enable();
     }
     //--------------Hub-----------------------------------------------
     public void OnClick(InputAction.CallbackContext context)
     {
+        Debug.Log("OnClick:");
         if (context.performed) LeftClickEvent?.Invoke(true);
         else if (context.canceled) LeftClickEvent?.Invoke(false);
     }
