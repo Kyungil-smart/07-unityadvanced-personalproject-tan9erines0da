@@ -204,7 +204,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Click"",
                     ""type"": ""PassThrough"",
                     ""id"": ""67597422-a7b0-4c72-9855-a1d9c88fe960"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -238,17 +238,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""0e358206-8205-48fb-b2ac-9ee76c81d429"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";PC"",
-                    ""action"": ""Click"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""3d78a3c7-5b27-4385-b9ed-ebdc58ecfa3d"",

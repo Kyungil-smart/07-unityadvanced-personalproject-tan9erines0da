@@ -6,22 +6,37 @@ public class MainHubUIManger : MonoBehaviour
     // [SerializeField] private InputReaderSO _inputReader;
     
     [Header("References")]
+    [SerializeField] InputReaderSO _inputReader;
     [SerializeField] private BehaviorGraphAgent _agent; 
     [SerializeField] private GameObject[] _layers;
+    
+    [Header("Event Channels")]
+    [SerializeField] UiChangeRequest _uiChangeRequest;
+    [SerializeField] EscPressed _escPressed;
 
     void Awake()
     {
-        // Debug.Log("MainHubUIManger : Awake");
-        // _inputReader.EnableHubInput();
+        
+    }
+
+    void OnEnable()
+    {
+        if(_inputReader != null) _inputReader.CancelEvent += Cancel;
+    }
+
+    void OnDisable()
+    {
+        if(_inputReader != null) _inputReader.CancelEvent -= Cancel;
     }
 
     // 버튼에서 호출할 함수
     public void OnClickChangeState(int newStateIndex)
     {
-        Debug.Log("Click");
         if(_agent == null) return;
         _agent.SetVariableValue("TargetUI", (HubUIState)newStateIndex);
         //BT의 TargetUI 변경
+        _uiChangeRequest.SendEventMessage();
+        
     }
 
     // BT의 Action 노드에서 호출할 실제 로직
@@ -34,5 +49,10 @@ public class MainHubUIManger : MonoBehaviour
             // 목표하는 레이어 제외 비활성화, 목표레이어만 활성
             _layers[i].SetActive(i == (int)state);
         }
+    }
+
+    public void Cancel()
+    {
+        _escPressed.SendEventMessage();
     }
 }
