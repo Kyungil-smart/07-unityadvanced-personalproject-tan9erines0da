@@ -27,7 +27,6 @@ public class AirborneState : BasePlayerState
             // 점프 물리 실행
             player.ExecuteJump();
             
-            // 데이터 차감 (Stat 클래스 내부에 차감 로직이 있다면 호출)
             player.RuntimeStat.LeftJumpCount--; 
         }
         else

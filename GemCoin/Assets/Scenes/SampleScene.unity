@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 69228110}
   m_Layer: 0
   m_Name: Player_Kaiser
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -277,7 +277,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5115618752126089108, guid: 3a005b0da9046d1458e662557175b383, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -323,6 +323,8 @@ MonoBehaviour:
   boxSize: {x: 0.71, y: 0.1}
   castDistance: 0.2
   castOffset: {x: 0, y: -1.29}
+  invincibilityDuration: 1.5
+  flashInterval: 0.1
 --- !u!50 &69228109
 Rigidbody2D:
   serializedVersion: 5
@@ -1028,12 +1030,12 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 65976918}
   - {fileID: 619394802}
   - {fileID: 877186023}
   - {fileID: 1662061192}
   - {fileID: 69228106}
   - {fileID: 1332494772}
-  - {fileID: 65976918}
   - {fileID: 519420032}
   - {fileID: 1579131161}
   - {fileID: 1744621887}
