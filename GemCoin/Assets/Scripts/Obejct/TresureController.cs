@@ -59,6 +59,10 @@ public class TreasureController : MonoBehaviour, IPoolable<TreasureController>, 
                 _magnetRoutine = StartCoroutine(MagnetMoveRoutine());
             }
         }
+        else if (collision.CompareTag("Remover"))
+        {
+            this.OriginPool.Release(this);
+        }
     }
 
     // 획득 시 호출

@@ -3,10 +3,12 @@ using UnityEngine;
 public class RuntimeSession : MonoBehaviour
 {
     // 달리는 동안 필요한 데이터를 관리하는 컴포넌트
-    [Header("Event Channels")]
+    [Header("Broadcast Channels")]
     [SerializeField] private IntEventChannelSO _coinUpdateChannel;
     [SerializeField] private IntEventChannelSO _hpUpdateChannel;
     [SerializeField] private IntEventChannelSO _scoreUpdateChannel;
+    
+    [Header("Listen Channels")]
 
     // 실시간 데이터 (Local)
     private int _currentCoin;

@@ -17,6 +17,5 @@ MonoBehaviour:
   maxHp: 100
   baseHpDrainRate: 1
   moveSpeed: 5
-  maxJumpCount: 2
+  maxJumpCount: 1
   magneticRange: 3
-  characterUniqueId: 0

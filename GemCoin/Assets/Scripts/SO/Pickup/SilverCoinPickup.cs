@@ -9,8 +9,9 @@ public class SilverCoinLogic : TreasureProcessor
     
     public override void Pickup(TreasureDataSO data)
     {
-        coinValue.OnEventRaised(data.coin);
-        coinCount.OnEventRaised(1);
-        silverCoinCount.OnEventRaised(1);
+        Debug.Log($"data coin{data.coin}");
+        coinValue?.RaiseEvent(data.coin);
+        coinCount?.RaiseEvent(1);
+        silverCoinCount?.RaiseEvent(1);
     }
 }

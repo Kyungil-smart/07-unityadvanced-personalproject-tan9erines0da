@@ -1,5 +1,6 @@
 ﻿using Unity.Behavior;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public class MainHubUIManger : MonoBehaviour
 {
     // [Header("Input")]
@@ -54,5 +55,10 @@ public class MainHubUIManger : MonoBehaviour
     public void Cancel()
     {
         _escPressed.SendEventMessage();
+    }
+    
+    public void RunningSceneChange()
+    {
+        SceneManager.LoadScene("Running");
     }
 }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ChunkGenerator : MonoBehaviour
 {
@@ -13,6 +15,11 @@ public class ChunkGenerator : MonoBehaviour
 
     private Vector3 _nextSpawnPoint = Vector3.zero;       // 다음 청크가 생성될 위치
     private Queue<Chunk> _activeChunks = new Queue<Chunk>();  // 활성화된 청크 관리 큐
+
+    private void Awake()
+    {
+        _playerTransform = FindObjectOfType<PlayerController>().transform;
+    }
 
     private void Start()
     {
@@ -34,8 +41,8 @@ public class ChunkGenerator : MonoBehaviour
         // 플레이어와 다음 생성 지점 사이의 거리가 임계값보다 작아지면 생성
         if (Vector3.Distance(_playerTransform.position, _nextSpawnPoint) < _spawnThreshold)
         {
-            SpawnChunk();
             RemoveOldChunk();
+            SpawnChunk();
         }
     }
 
@@ -46,9 +53,10 @@ public class ChunkGenerator : MonoBehaviour
 
         // PoolManager를 통해 오브젝트 활성
         Chunk newChunk = PoolManager.Instance.Get(prefab);
-
-        // 위치 설정 및 앵커 기반 좌표 갱신
         newChunk.transform.position = _nextSpawnPoint;
+        newChunk.ObjectPositionSet();
+        // 위치 설정 및 앵커 기반 좌표 갱신
+        
         _nextSpawnPoint = newChunk.ExitPosition;
 
         _activeChunks.Enqueue(newChunk);
@@ -57,7 +65,7 @@ public class ChunkGenerator : MonoBehaviour
     private void RemoveOldChunk()
     {
         // 화면 뒤로 많이 밀려난 청크 반환 (여유분 2~3개 유지)
-        if (_activeChunks.Count > _initialChunks + 2)
+        if (_activeChunks.Count > _initialChunks+1)
         {
             Chunk oldChunk = _activeChunks.Dequeue();
             
