@@ -17,7 +17,7 @@ public class PlayerStatSO : ScriptableObject
     public float moveSpeed = 8f;
     
     [Tooltip("모든 캐릭터 공통 점프력 (레벨 디자인 기준점)")]
-    public const float JumpForce = 6f;
+    public const float JumpForce = 9f;
     
     public int maxJumpCount = 2;
 

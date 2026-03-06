@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerStatSO statData;
+    [SerializeField] InputReaderSO inputReader;
     
     [Header("Ground Check Settings")]
     [SerializeField] private LayerMask groundLayer;
@@ -52,22 +53,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        // 직접 할당 방식의 인풋 이벤트 구독
-        if (InputManager.Instance != null)
-        {
-            InputManager.Instance.OnJumpInput += HandleJump;
-            InputManager.Instance.OnSkill1Input += HandleSlide;
-        }
+        inputReader.JumpEvent += HandleJump;
+        inputReader.Skill1Event += HandleSlide;
     }
 
     private void OnDisable()
     {
-        // 메모리 누수 방지를 위한 해제 (중요!)
-        if (InputManager.Instance != null)
-        {
-            InputManager.Instance.OnJumpInput -= HandleJump;
-            InputManager.Instance.OnSkill1Input -= HandleSlide;
-        }
+        inputReader.JumpEvent -= HandleJump;
+        inputReader.Skill1Event -= HandleSlide;
     }
 
     private void HandleJump()
@@ -99,7 +92,7 @@ public class PlayerController : MonoBehaviour
         // 하강 시 중력 배율 적용 (낙하감을 더 묵직하게)
         if (_rb.linearVelocity.y < 0)
         {
-            _rb.gravityScale = 1.5f;
+            _rb.gravityScale = 3f;
         }
         else
         {

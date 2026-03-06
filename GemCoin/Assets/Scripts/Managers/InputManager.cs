@@ -9,6 +9,7 @@ public class InputManager : SingletonMono<InputManager>
     public Action<bool> OnSkill1Input;
     public Action<bool> OnSkill2Input;
     public Action<bool> OnSkill3Input;
+    public Action OnClickedInput;
 
     private PlayerInput _playerInput;
 
@@ -37,6 +38,9 @@ public class InputManager : SingletonMono<InputManager>
         // 스킬 3
         _playerInput.actions["Skill3"].performed += OnSkill3Performed;
         _playerInput.actions["Skill3"].canceled += OnSkill3Canceled;
+        
+        // 클릭
+        _playerInput.actions["Click"].performed += OnClick;
     }
 
     private void OnDestroy()
@@ -53,12 +57,19 @@ public class InputManager : SingletonMono<InputManager>
 
         _playerInput.actions["Skill3"].performed -= OnSkill3Performed;
         _playerInput.actions["Skill3"].canceled -= OnSkill3Canceled;
+        
+        _playerInput.actions["Click"].performed -= OnClick;
     }
 
     // 인풋 시스템 입력을 이벤트에 연결
     private void OnJump(InputAction.CallbackContext ctx) => OnJumpInput?.Invoke();
 
-    private void OnSkill1Performed(InputAction.CallbackContext ctx) => OnSkill1Input?.Invoke(true);
+    private void OnSkill1Performed(InputAction.CallbackContext ctx)
+    {
+        OnSkill1Input?.Invoke(true);
+        Debug.Log("Skill1");
+    }
+
     private void OnSkill1Canceled(InputAction.CallbackContext ctx) => OnSkill1Input?.Invoke(false);
 
     private void OnSkill2Performed(InputAction.CallbackContext ctx) => OnSkill2Input?.Invoke(true);
@@ -66,4 +77,10 @@ public class InputManager : SingletonMono<InputManager>
 
     private void OnSkill3Performed(InputAction.CallbackContext ctx) => OnSkill3Input?.Invoke(true);
     private void OnSkill3Canceled(InputAction.CallbackContext ctx) => OnSkill3Input?.Invoke(false);
+    
+    void OnClick(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Clicked");
+        OnClickedInput?.Invoke();
+    }
 }

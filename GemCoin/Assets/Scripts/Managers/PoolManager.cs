@@ -41,4 +41,18 @@ public class PoolManager : MonoBehaviour
         
         return obj;
     }
+    public T Get<T>(T prefab, Vector3 position) where T : Component
+    {
+        // 프리팹을 키로 풀 탐색
+        var pool = GetPool(prefab);
+        // 풀에서 겟(UnityEngine.Pool으로 구현)
+        T obj = pool.Get();
+        
+        // 인터페이스 주입 (생성 시점에 못했을 경우를 대비한 확정 주입)
+        if (obj is IPoolable<T> p) p.OriginPool = pool;
+        
+        obj.transform.position = position;
+        
+        return obj;
+    }
 }

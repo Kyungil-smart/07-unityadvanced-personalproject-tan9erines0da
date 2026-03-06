@@ -8,7 +8,6 @@ public class SlideState : BasePlayerState
     {
         Debug.Log("Slide State: 슬라이딩 시작");
         // 캐릭터의 피격 판정을 낮추는 로직 호출
-        // player.SetColliderHeight(0.5f); 
     }
 
     public override void Update()
@@ -20,7 +19,7 @@ public class SlideState : BasePlayerState
             return;
         }
 
-        // 2. 물리적 이동 유지 (슬라이딩 전용 속도 적용 등)
+        // 2. 물리적 이동 유지 
         player.HandleMovement();
     }
 
